@@ -57,7 +57,7 @@ def load_data_to_postgis():
     with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    # 4. Inyección de datos (Transformación al vuelo)
+    # 4. Inyección de data 
     print("Limpiando e inyectando datos espaciales...")
     cargadores_count = 0
     nodos_count = 0
@@ -69,7 +69,6 @@ def load_data_to_postgis():
             lat = element['lat']
             tags = element['tags']
             
-            # Priorizamos el nombre chino, si no hay, buscamos el inglés
             nombre = tags.get('name:zh', tags.get('name', tags.get('name:en', 'Desconocido')))
 
             # Clasificación y carga para la Tabla 1 (Cargadores)
