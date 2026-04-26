@@ -1,0 +1,24 @@
+urban-data-pipelines/
+│
+├── data/
+│   ├── raw/                          # No estan en GitHub ni en el front
+│   │   ├── chongqingZ_walk_network.geojson  # Red para cálculo de distancias
+│   │   ├── chongqingZ_elevation_utm.tif     # Topografía SRTM
+│   │   ├── chongqingZ_ndvi.tif              # Satélite Sentinel-2
+│   │   └── chongqingZ_viirs.tif             # Satélite Suomi NPP
+│   │
+│   └── processed/                    # Vectores finales (Se conectan a React/Supabase)
+│       ├── 01_digitaltwin_buildings.geojson # Alturas inferidas + NDVI/VIIRS
+│       ├── 02_digitaltwin_transit.geojson   # Nodos de monorraíl
+│       ├── 03_digitaltwin_roads.geojson     # Jerarquía vial
+│       └── 04_digitaltwin_pois.geojson      # Anclas comerciales
+│
+└── scripts/
+    ├── 01_extract_osm.py             # Extrae red vial y huellas base
+    ├── 02_extract_elevation.py       # Descarga DEM SRTM de NASA
+    ├── 03_extract_overture.py        # Descarga huellas precisas de Overture
+    ├── 04_extract_transit.py         # Ubica transporte masivo
+    ├── 05_extract_pois_roads.py      # Filtra comercio y vías principales
+    ├── 06_urban_inference_engine.py  # MOTOR MCDA: Calcula puntajes y asigna pisos
+    ├── 07_download_validation.py     # Extrae imágenes de Earth Engine
+    └── 08_validate_inference.py      # Cruce estadístico final por deciles
