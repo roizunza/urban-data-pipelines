@@ -21,7 +21,7 @@ Para calcular la edificabilidad de más de 16,000 polígonos, el *Urban Inferenc
 
 ## 2. Estructura del Proyecto y Organización de los Archivos
 El repositorio separa la extracción de datos crudos de los vectores procesados que alimentan el frontend (Supabase / Deck.gl).
-
+```text
 03_DigitaltwinChongqing/
 │
 ├── cache/                            # Archivos de caché del entorno
@@ -58,7 +58,9 @@ El repositorio separa la extracción de datos crudos de los vectores procesados 
 ├── requirements.txt                  # Dependencias y librerías de Python
 ├── venv/                             # Entorno virtual general
 ├── .env                              # Variables de entorno y credenciales
-└── .gitignore                      
+└── .gitignore         
+
+```
 
 ## 3. Ejemplos de Gráficos e Insights Obtenidos
 Para comprobar el rigor del modelo geométrico frente al mundo real, se diseñó una prueba de validación (ground-truthing). Se segmentó la ciudad en deciles, contrastando el Top 10% (los 3,865 edificios con mayor volumen inferido) contra el Bottom 10% (las 12,736 estructuras de menor escala) evaluando métricas satelitales externas:
