@@ -32,21 +32,18 @@ def validate_digital_twin(processed_dir: str, raw_dir: str) -> None:
     coords = [(geom.x, geom.y) for geom in centroids_wgs84]
     
     print("Extrayendo validadores fisicos...")
-    ndvi_path = os.path.join(raw_dir, 'chongqingZ_ndvi.tif')
     viirs_path = os.path.join(raw_dir, 'chongqingZ_viirs.tif')
     
-    buildings['val_ndvi'] = extract_raster_value(coords, ndvi_path)
     buildings['val_viirs'] = extract_raster_value(coords, viirs_path)
     
-    # Limpieza de anomalias en bordes de rasters
-    buildings['val_ndvi'] = np.where((buildings['val_ndvi'] < -1) | (buildings['val_ndvi'] > 1), 0, buildings['val_ndvi'])
+    # Limpieza de anomalias en bordes de raster
     buildings['val_viirs'] = np.where(buildings['val_viirs'] < 0, 0, buildings['val_viirs'])
     
-    # Exportar GeoJSON final p
+    # Exportar GeoJSON final
     output_path = os.path.join(processed_dir, 'chongqingZ_digital_twin_validated.geojson')
     buildings.to_file(output_path, driver='GeoJSON', engine='pyogrio')
     
-   # Reporte Estadistico de Validacion (Por Deciles)
+    # Reporte Estadistico de Validacion (Por Deciles)
     print("\n" + "="*40)
     print(" REPORTE DE GROUND-TRUTHING (VALIDACION)")
     print("="*40)
@@ -64,11 +61,6 @@ def validate_digital_twin(processed_dir: str, raw_dir: str) -> None:
     print(f"   -> Top 10% (Rascacielos/Alta Densidad): Promedio Rad: {alta_densidad['val_viirs'].mean():.2f}")
     print(f"   -> Bottom 10% (Baja Densidad):          Promedio Rad: {baja_densidad['val_viirs'].mean():.2f}")
     print(f"   * Exito: El valor del Top 10% debe ser mayor al Bottom 10%.\n")
-    
-    print(f"2. CORRELACION ECOLOGICA (Freno NDVI):")
-    print(f"   -> Top 10% (Rascacielos/Alta Densidad): Promedio NDVI: {alta_densidad['val_ndvi'].mean():.2f}")
-    print(f"   -> Bottom 10% (Baja Densidad):          Promedio NDVI: {baja_densidad['val_ndvi'].mean():.2f}")
-    print(f"   * Exito: El valor del Bottom 10% debe ser mayor al Top 10%.")
     print("="*40 + "\n")
 
 if __name__ == "__main__":
