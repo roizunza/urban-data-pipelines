@@ -29,17 +29,6 @@ def download_validation_rasters(processed_dir: str, raw_dir: str) -> None:
         .select('avg_rad') \
         .median() \
         .clip(roi)
-        
-    # 2. Sentinel-2 NDVI (Maximo verdor anual)
-    print("Procesando satelite Sentinel-2 (NDVI)...")
-    s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED") \
-        .filterDate('2023-01-01', '2023-12-31') \
-        .filterBounds(roi) \
-        .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) \
-        .median() \
-        .clip(roi)
-    
-    ndvi = s2.normalizedDifference(['B8', 'B4']).rename('NDVI')
     
     def download_ee_image(image: ee.Image, filename: str, scale: int) -> None:
         try:
@@ -59,7 +48,6 @@ def download_validation_rasters(processed_dir: str, raw_dir: str) -> None:
 
     # Descargas (VIIRS a 100m, NDVI a 10m de resolucion)
     download_ee_image(viirs, 'chongqingZ_viirs.tif', 100)
-    download_ee_image(ndvi, 'chongqingZ_ndvi.tif', 10)
 
 if __name__ == "__main__":
     initialize_ee()
