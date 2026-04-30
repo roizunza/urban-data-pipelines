@@ -46,7 +46,7 @@ def download_validation_rasters(processed_dir: str, raw_dir: str) -> None:
         except Exception as e:
             print(f"Error descargando {filename}: {e}")
 
-    # Descargas (VIIRS a 100m, NDVI a 10m de resolucion)
+    # Descargas (VIIRS a 100m)
     download_ee_image(viirs, 'chongqingZ_viirs.tif', 100)
 
 if __name__ == "__main__":

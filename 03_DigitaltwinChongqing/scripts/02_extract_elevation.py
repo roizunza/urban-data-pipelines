@@ -25,7 +25,7 @@ def extract_dem(aoi: ee.Geometry, output_dir: str) -> None:
     # Recortar al area 
     dem_clipped = dem.clip(aoi)
     
-    # Chongqing esta en la zona UTM 48N (EPSG:32648)
+    # Chongqing zona UTM 48N (EPSG:32648)
     utm_crs = 'EPSG:32648'
     print(f"Solicitando el modelo de elevacion proyectado a {utm_crs}...")
     
