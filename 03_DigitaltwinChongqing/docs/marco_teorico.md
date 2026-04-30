@@ -1,8 +1,29 @@
-Tienes toda la razón, Rocío. Fue un despiste mío pasarte la versión en español de nuevo cuando ya la teníamos lista y solo necesitabas la traducción directa para tu repositorio. 
+# Marco Teórico y Fundamentos Analíticos
 
-Aquí tienes el texto completo del Marco Teórico interpretado 100% en inglés, manteniendo el rigor y los términos técnicos exactos:
+El presente proyecto emplea el *Urban Inference Engine*, el cual se define como un motor algorítmico diseñado para estimar parámetros morfológicos urbanos (como la escala y altura constructiva) a partir de variables espaciales y de infraestructura subyacente. Su funcionamiento no es aleatorio; se fundamenta en teorías consolidadas provenientes de diversos ámbitos de teoría urbana, tales como la econometría espacial y la geografía cuantitativa. Asimismo, integra metodologías de disciplinas analíticas complejas —como la percepción remota, la teledetección y la estadística paramétrica— para lograr un acercamiento y decodificar el entretejido urbano.
 
-***
+A continuación, se explican las teorías de las que se nutre el algoritmo para funcionar:
+
+**1. Economía Espacial y Densidad Inducida (Bid-Rent Theory)**
+El algoritmo utiliza la **Teoría de la Renta del Suelo (Bid-Rent Theory)** postulada por William Alonso (1964). Esta teoría dicta que el precio del suelo y la densidad de construcción son inversamente proporcionales a la distancia de los centros de actividad económica. En el modelo, la concentración de Puntos de Interés (POIs) financieros y turísticos actúa como un proxy matemático del "Centro de Negocios". Las parcelas (polígonos) con mayor densidad de POIs en un radio caminable absorben una enorme presión inmobiliaria, forzando al algoritmo a extruir el volumen verticalmente para maximizar la rentabilidad del lote.
+
+**2. Sintaxis Espacial y Capacidad de Carga Vial (Space Syntax)**
+Para modelar la restricción del volumen construido en función de las calles, el modelo incorpora fundamentos de la **Teoría de la Sintaxis Espacial** (Hillier y Hanson, 1984). Esta teoría establece que la red vial es el esqueleto morfológico que dicta la distribución de los usos del suelo y la densidad. Las vías con mayor grado de integración topológica (avenidas primarias y secundarias) poseen una mayor "capacidad de carga" para absorber flujos vehiculares y peatonales, condicionando la viabilidad de soportar densidades verticales masivas. Por el contrario, las vías de orden inferior (calles residenciales o senderos) imponen restricciones físicas. Dentro del motor algorítmico, la jerarquía vial extraída topológicamente opera como un coeficiente restrictivo o potenciador de la escala permitida según su clasificación.
+
+**3. Desarrollo Orientado al Transporte (TOD) y Fricción Espacial**
+Para modelar la influencia de la infraestructura de transporte masivo (líneas de monorraíl y metro), el modelo se basa en los principios del **Desarrollo Orientado al Transporte (TOD)** (Calthorpe, 1993), postulando que la urbanización de alta densidad debe orbitar a distancias caminables de las estaciones. 
+En la planificación urbana tradicional se calculan "buffers circulares euclidianos" —radios teóricos trazados en línea recta plana desde la estación—. Dado el contexto y la topografía característica de Chongqing, aplicar radios lineales resulta en una interpretación incierta. Por ello, el algoritmo aplica el concepto de **Fricción Espacial** (derivado de la Primera Ley de la Geografía de Waldo Tobler), el cual establece que el movimiento a través del territorio requiere un costo en esfuerzo o energía. Utilizando Modelos Digitales de Elevación (DEM - SRTM) y algoritmos de indexación espacial (K-D Trees), el modelo calcula una distancia base con un coeficiente de desvío que simula el recorrido de la trama peatonal, y aplica una fórmula que penaliza el costo de movimiento asignando un equivalente de 10 metros de distancia horizontal por cada metro de desnivel vertical ascendido ($\Delta Z \times 10$), modelando así el área de captación topográfica real de las estaciones.
+
+**4. Evaluación Multicriterio Espacial (Spatial MCDA)**
+Para integrar las variables mencionadas (densidad comercial, distancia a nodos y capacidad de la calle), se empleó una **Evaluación Multicriterio Espacial (Spatial MCDA)**, estandarizada por J. Malczewski (1999). El modelo toma las variables que acotan el entorno territorial, normalizándolas y asignándoles un valor para después ponderarlas bajo una escala común (0-100 puntos) mediante una Combinación Lineal Ponderada (WLC - *Weighted Linear Combination*). 
+En el código del motor de inferencia, esta ecuación se traduce en un peso del 40% para la accesibilidad al transporte (con su respectiva fricción topográfica), 30% para la densidad de POIs y 30% para la jerarquía vial. Esto permite tomar decisiones polígono por polígono: un edificio puede poseer alta demanda comercial, pero si el vector de jerarquía vial (vía de baja capacidad) o la elevación del terreno actúan como barreras que incrementan drásticamente el esfuerzo de accesibilidad, el MCDA penaliza el puntaje final, restringiendo la inferencia de un rascacielos donde la infraestructura física no lo soporta.
+
+**5. Validación Satelital (Ground-Truthing)**
+La validación geométrica de las inferencias se realiza cruzando los resultados con datos de espectrometría satelital, utilizando un índice de luminisencia: 
+* **VIIRS (Nighttime Lights):** Utilizando la Banda Día/Noche (DNB - *Day/Night Band*) del instrumento VIIRS a bordo del satélite Suomi NPP, se captura la radiancia de emisiones lumínicas en longitudes de onda de 0.5 a 0.9 micrómetros. El sensor DNB es altamente sensible a la iluminación antropogénica continua. La literatura académica espacial (Elvidge et al., 2012) justifica el uso de esta métrica como un proxy directo del Producto Interno Bruto (PIB) local y la densidad construida, comprobando que existe una correlación matemática lineal entre la intensidad de fotones detectados por el sensor satelital y el volumen de actividad socioeconómica y consumo energético concentrado en la superficie terrestre subyacente.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
 
 # Theoretical Framework and Analytical Foundations
 
