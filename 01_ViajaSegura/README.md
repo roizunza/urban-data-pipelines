@@ -6,16 +6,16 @@ El objetivo central de este proyecto es construir el sustento operativo y técni
 La relevancia de este análisis radica en demostrar cómo la movilidad responde a la ciudad, articulando los nodos que las mujeres ya usan en su día a día. El proyecto visibiliza cómo la ubicación estratégica de servicios a distancias caminables facilita la vida cotidiana de las usuarias.
 
 ### Metodología
-Para transformar el levantamiento de campo en un activo digital, el flujo de trabajo ejecutó el siguiente proceso[cite: 1]:
-*   **Diseño de Instrumentos:** Creación de formatos para capturar ascensos, descensos y tiempos de recorrido en campo[cite: 1].
-*   **Tratamiento y Validación (QGIS):** Limpieza de trazas geoespaciales y generación de **isocronas de 500 metros** para medir la accesibilidad peatonal[cite: 1].
-*   **Cruce de Equipamiento:** Relación espacial entre paradas de alta demanda y la presencia de anclas urbanas (salud, educación y abasto)[cite: 1].
-*   **Pipeline de Métricas (Python):** Automatización del cálculo de indicadores operativos y de demanda[cite: 1].
+Para transformar el levantamiento de campo en un activo digital, el flujo de trabajo ejecutó el siguiente proceso
+*   **Diseño de Instrumentos:** Creación de formatos para capturar ascensos, descensos y tiempos de recorrido en campo.
+*   **Tratamiento y Validación (QGIS):** Limpieza de trazas geoespaciales y generación de **isocronas de 500 metros** para medir la accesibilidad peatonal
+*   **Cruce de Equipamiento:** Relación espacial entre paradas de alta demanda y la presencia de anclas urbanas (salud, educación y abasto).
+*   **Pipeline de Métricas (Python):** Automatización del cálculo de indicadores operativos y de demanda.
 
 *(Para profundizar en los fundamentos de Movilidad de Cuidados y los algoritmos de accesibilidad utilizados, consulta el [Marco Teórico](./docs/marco_teorico.md).*
 
 ## 2. Estructura del Proyecto y Organización de los Archivos
-El repositorio organiza los datos y scripts siguiendo un flujo de procesamiento modular[cite: 1]:
+El repositorio organiza los datos y scripts siguiendo un flujo de procesamiento modular:
 
 ```text
 01_ViajaSegura/
@@ -58,7 +58,7 @@ Los siguientes pasos para evolucionar esta herramienta incluyen la integración 
 *(Para consultar términos técnicos como "Viajes Encadenados" o "Isocronas", revisa el [Glosario](./docs/glosario.md)*
 
 ## 4. Instrucciones para Ejecutar
-Para reproducir el análisis de métricas y geoprocesamiento localmente[cite: 1]:
+Para reproducir el análisis de métricas y geoprocesamiento localmente.
 
 1.  Clona el repositorio e instala las dependencias: `pip install -r requirements.txt`.
 2.  Navega a la carpeta `scripts/`.

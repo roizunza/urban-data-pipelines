@@ -69,7 +69,7 @@ This document defines the key concepts of urban mobility, spatial data science, 
 *   **Care Mobility:** Trips made to perform domestic tasks and care for dependents (children, elderly). These trips are usually made mostly by women.
 *   **Care Work:** Activities intended to satisfy the nutritional, health, educational, and emotional well-being needs of individuals (especially children, people with disabilities, and the elderly), as well as household maintenance. This work, disproportionately performed by women, is the axis that generates the demand for trip chaining and justifies the need for specialized transportation.
 *   **Gender Perspective in Transport:** An analytical approach that recognizes that men and women use the city differently due to social roles, safety levels, and mobility needs.
-*   **Intersectionality:** A framework that analyzes how different social identities (gender, social class, geographical location) intersect to create experiences of exclusion or privilege in access to the city[cite: 1].
+*   **Intersectionality:** A framework that analyzes how different social identities (gender, social class, geographical location) intersect to create experiences of exclusion or privilege in access to the city.
 *   **Spatial Justice:** The right of all inhabitants to have equitable access to the resources, services, and opportunities offered by the city, regardless of their location on the periphery.
 *   **Trip Chaining:** A mobility pattern consisting of making multiple brief, successive stops between the origin and the final destination (e.g., home -> school -> market -> stop -> work).
 
