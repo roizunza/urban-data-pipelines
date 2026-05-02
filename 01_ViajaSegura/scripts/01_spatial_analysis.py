@@ -6,7 +6,6 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = SCRIPT_DIR.parent
 STOPS_PATH = PROJECT_DIR / "data" / "raw" / "paradas_r66.json"
-# Corregido a .json como tus archivos reales
 ISOCHRONES_PATH = PROJECT_DIR / "data" / "raw" / "isocronas.json" 
 EQUIPAMIENTO_PATH = PROJECT_DIR / "data" / "raw" / "equipamiento.json"
 OUTPUT_PATH = PROJECT_DIR / "data" / "processed" / "01_viajasegura_metricas_demanda.geojson"
@@ -36,8 +35,18 @@ def run_spatial_analysis():
     # Unir puntos de equipamiento con poligonos de isocrona
     # joined contendra la info de la isocrona (origin_id) para cada punto de equipamiento
     joined = gpd.sjoin(fac_utm, iso_utm, how="inner", predicate="intersects")
+
+
+    print("Realizando join espacial...")
+    # Asegurarnos de que el equipamiento tenga un ID único (su índice)
+    fac_utm['fac_id'] = fac_utm.index
     
-    # Contar por la columna 'equipamiento' (EDUCATIVO, SALUD, ABASTO) que viene en tu json
+    joined = gpd.sjoin(fac_utm, iso_utm, how="inner", predicate="intersects")
+    
+    # ELIMINAR DUPLICADOS: Si un equipamiento intersecta múltiples anillos de la misma isócrona, nos quedamos con uno.
+    joined = joined.drop_duplicates(subset=['origin_id', 'fac_id'])
+    
+    # Contar por la columna 'equipamiento'
     equip_counts = joined.groupby(['origin_id', 'equipamiento']).size().unstack(fill_value=0)
     
     # Calcular total de equipamientos por isocrona
