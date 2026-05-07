@@ -2,10 +2,6 @@ import os
 import geopandas as gpd
 
 def clean_for_mapbox():
-    """
-    Filtra las columnas del GeoJSON simulado para reducir el peso del archivo
-    antes de subirlo como un Tileset a Mapbox Studio.
-    """
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     in_path = os.path.join(base_dir, "data", "processed", "kamakura_nodes_simulated.geojson")
     out_path = os.path.join(base_dir, "data", "processed", "kamakura_mapbox_ready.geojson")
@@ -21,8 +17,11 @@ def clean_for_mapbox():
         'geometry'
     ]
 
-    print("Filtrando atributos estrictamente visuales...")
+    print("Filtrando atributos y transformando a WGS84 (Lat/Lon)...")
     gdf_clean = gdf[columnas_esenciales].copy()
+    
+    # EL PARCHE: Regresamos las coordenadas a Latitud/Longitud para Mapbox
+    gdf_clean = gdf_clean.to_crs("EPSG:4326")
 
     print("Exportando archivo ligero para la nube...")
     gdf_clean.to_file(out_path, driver="GeoJSON")
