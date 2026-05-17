@@ -22,8 +22,6 @@ Este documento define los conceptos clave de movilidad urbana, ciencia de datos 
 
 ### 3. Movilidad, Género e Interseccionalidad
 
-### 3. Movilidad, Género e Interseccionalidad
-
 *   **Economía de los Cuidados:** El conjunto de actividades no remuneradas (y a veces remuneradas) necesarias para el bienestar de las personas. La Ruta 66 es el soporte físico que permite que esta economía funcione en el sur de la ciudad.
 *   **Interseccionalidad:** Marco que analiza cómo diferentes identidades sociales (género, clase social, ubicación geográfica) se cruzan para crear experiencias de exclusión o privilegio en el acceso a la ciudad.
 *   **Justicia Espacial:** El derecho de todos los habitantes a acceder de manera equitativa a los recursos, servicios y oportunidades que ofrece la ciudad, independientemente de su ubicación en la periferia.
