@@ -16,7 +16,7 @@ Para calcular el comportamiento y la resiliencia de más de 5,900 nodos viales a
 * **Inunda paramétricamente** el territorio bajo diferentes escenarios extremos (10m, 20m, 30m), eliminando topológicamente las calles que quedan sumergidas.
 * **Calcula rutas de evacuación de emergencia** evaluando qué calles pierden acceso a los refugios oficiales del gobierno y cuáles logran conectarse de manera emergente a un templo en zonas seguras.
 
-*(Para conocer a profundidad las teorías sobre Teoría de Grafos, Fricción Espacial y Resiliencia Latente que justifican matemáticamente este motor, consulta el [Marco Teórico](https://www.google.com/search?q=./docs/marco_teorico.md)).*
+*(Para conocer a profundidad las teorías sobre Teoría de Grafos, Fricción Espacial y Resiliencia Latente que justifican matemáticamente este motor, consulta el [Marco Teórico](./docs/marco_teorico.md)*
 
 ---
 
@@ -75,8 +75,7 @@ Los siguientes pasos para evolucionar este algoritmo incluirían:
 * **Capacidad de Carga en Refugios:** Transicionar de un modelo de accesibilidad pura a uno de optimización de aforos, simulando la saturación y distribución logística de los equipamientos emergentes.
 * **Agent-Based Modeling (ABM):** Simular flujos de multitudes interactuando en tiempo real para evaluar cuellos de botella bajo condiciones de pánico masivo.
 
-*(Para consultar algún término técnico de este repositorio, puedes revisar el [Glosario](https://www.google.com/search?q=./docs/glosario.md)).*
-
+*(Para consultar algún término técnico de este repositorio, puedes revisar el [Glosario](./docs/glosario.md)).*
 ---
 
 ## 4. Instrucciones para Ejecutar
@@ -109,7 +108,7 @@ To calculate the behavior and resilience of over 5,900 road nodes in the face of
 * **Parametrically floods** the territory under different extreme scenarios (10m, 20m, 30m), topologically removing the streets that remain submerged.
 * **Calculates emergency evacuation routes** by evaluating which streets lose access to official government shelters and which manage to emergently connect to a temple in safe zones.
 
-*(To gain an in-depth understanding of the theories on Graph Theory, Spatial Friction, and Latent Resilience that mathematically justify this engine, please refer to the [Theoretical Framework](https://www.google.com/search?q=./docs/marco_teorico.md)).*
+*(To gain an in-depth understanding of the theories on Graph Theory, Spatial Friction, and Latent Resilience that mathematically justify this engine, please refer to the [Theoretical Framework](./docs/marco_teorico.md)).*
 
 ---
 
@@ -168,7 +167,7 @@ The next steps to evolve this algorithm would include:
 * **Shelter Carrying Capacity:** Transition from a pure accessibility model to a capacity optimization model, simulating the saturation and logistical distribution of emergent facilities.
 * **Agent-Based Modeling (ABM):** Simulate crowds interacting in real-time to evaluate bottlenecks under conditions of massive panic.
 
-*(To consult any technical term from this repository, you can review the [Glossary](https://www.google.com/search?q=./docs/glosario.md)).*
+*(To consult any technical term from this repository, you can review the [Glossary](./docs/glosario.md)).*
 
 ---
 
