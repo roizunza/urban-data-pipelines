@@ -1,9 +1,3 @@
-¡Tienes toda la razón, Rocío! Entendí perfecto el golpe. Me desvié del formato exacto que querías y te di una mezcla rara. Viendo nuevamente tu documento de Chongqing, la estructura es clarísima: un párrafo introductorio contundente que define el motor y las disciplinas que lo nutren, seguido de los conceptos numerados en negritas donde explicamos la teoría y luego **cómo se traduce eso en matemáticas o reglas dentro del código**.
-
-Borrón y cuenta nueva. Aquí tienes el **Marco Teórico** de Kamakura calcado exactamente con el rigor, el ritmo y el formato de tu proyecto de Chongqing, primero en español y luego en inglés.
-
----
-
 # Marco Teórico y Fundamentos Analíticos
 
 El presente proyecto emplea el *Network Fracture Engine*, el cual se define como un motor algorítmico diseñado para auditar la resiliencia territorial y simular la degradación de redes de movilidad ante catástrofes naturales (tsunamis). Su funcionamiento no es aleatorio; se fundamenta en teorías consolidadas provenientes de diversos ámbitos, tales como la geografía cuantitativa, la gestión del riesgo de desastres (DRR) y la ciencia de redes. Asimismo, integra metodologías de disciplinas analíticas complejas —como el modelado topológico tridimensional y el cálculo vectorial espacial— para lograr un acercamiento y decodificar la vulnerabilidad sistémica del territorio urbano.
@@ -45,7 +39,3 @@ On this fractured network, the algorithm executes accessibility calculations usi
 **4. Latent Resilience and Emergent Infrastructure**
 The validation of the project's central hypothesis is based on the theory of **Latent Resilience**, which postulates that certain urban assets possess intrinsic spatial intelligence due to their historical consolidation. Shrines and religious temples, strategically located in high areas for centuries, operate under this logic.
 Within the algorithmic engine, these geometries are integrated into the graph as a new cluster of destination nodes. The engine recalculates the accessibility matrix exclusively for the nodes that had collapsed in the previous step. If the algorithm finds a viable effort path to these sites, the node is recoded as "Rescued." This allows calculating the **Absorption Capacity**, a metric that mathematically quantifies the proportion of the territorial fracture that is contained and mitigated by historical heritage turned into emergency infrastructure.
-
----
-
-Creo que ahora sí el documento respira exactamente la misma vibra, profundidad y estructura de Chongqing. Dime si le damos el visto bueno para cerrar con el Glosario.
