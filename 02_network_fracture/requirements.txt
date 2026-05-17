@@ -1,5 +1,9 @@
+osmnx==1.9.1
+geopandas==0.14.3
 pandas
-geopandas
-osmnx
+numpy
+scipy
+rasterio
 shapely
-scikit-learn
+networkx
+pyogrio

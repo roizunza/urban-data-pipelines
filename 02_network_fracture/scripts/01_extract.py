@@ -1,32 +1,51 @@
 import os
+import osmnx as ox
 import geopandas as gpd
 
-def clean_for_mapbox():
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    in_path = os.path.join(base_dir, "data", "processed", "kamakura_nodes_simulated.geojson")
-    out_path = os.path.join(base_dir, "data", "processed", "kamakura_mapbox_ready.geojson")
-
-    print("Cargando archivo simulado completo...")
-    gdf = gpd.read_file(in_path)
-
-    columnas_esenciales = [
-        'orphan_off_0m', 'saved_by_temple_0m',
-        'orphan_off_10m', 'saved_by_temple_10m',
-        'orphan_off_20m', 'saved_by_temple_20m',
-        'orphan_off_30m', 'saved_by_temple_30m',
-        'geometry'
-    ]
-
-    gdf_clean = gdf[columnas_esenciales].copy()
+def download_kamakura_baseline():
+    print("Iniciando Fase 1: Extraccion de infraestructura base...")
     
-    if gdf_clean.crs is None:
-        gdf_clean.set_crs(epsg=32654, inplace=True)
-        
-    gdf_clean = gdf_clean.to_crs(epsg=4326)
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    output_dir = os.path.join(base_dir, "data", "processed")
+    os.makedirs(output_dir, exist_ok=True)
 
-    print("Exportando archivo ligero para la nube...")
-    gdf_clean.to_file(out_path, driver="GeoJSON")
-    print(f"[Exito] Archivo listo para Mapbox en: {out_path}")
+    place_query = "Kamakura, Kanagawa, Japan"
+
+    # 1. Descarga y desestructuracion de la red vial de OpenStreetMap
+    print("Descargando red vial peatonales de Kamakura...")
+    graph = ox.graph_from_place(place_query, network_type="walk")
+    
+    nodes, edges = ox.graph_to_gdfs(graph)
+    
+    # Estandarizacion de indices para conservar topologia pura
+    nodes = nodes.reset_index()
+    edges = edges.reset_index()
+
+    # 2. Descarga de refugios gubernamentales oficiales
+    print("Extrayendo refugios oficiales de evacuacion...")
+    shelters_tags = {"amenity": ["public_building", "school", "townhall"]}
+    shelters_gdf = ox.geometries_from_place(place_query, tags=shelters_tags)
+    shelters_gdf = shelters_gdf[shelters_gdf.geometry.type == 'Point']
+
+    # 3. Descarga de la red de templos y lugares de culto (Infraestructura latente)
+    print("Extrayendo red de templos y santuarios historicos...")
+    temples_tags = {"amenity": "place_of_worship", "religion": ["buddhist", "shinto"]}
+    temples_gdf = ox.geometries_from_place(place_query, tags=temples_tags)
+
+    # Exportacion limpia a GeoJSON en formato metrico local (UTM Zona 54N)
+    print("Normalizando proyecciones espaciales a EPSG:32654...")
+    
+    nodes = nodes.to_crs(epsg=32654)
+    edges = edges.to_crs(epsg=32654)
+    shelters_gdf = shelters_gdf.to_crs(epsg=32654)
+    temples_gdf = temples_gdf.to_crs(epsg=32654)
+
+    nodes.to_file(os.path.join(output_dir, "kamakura_nodes.geojson"), driver="GeoJSON")
+    edges.to_file(os.path.join(output_dir, "kamakura_edges.geojson"), driver="GeoJSON")
+    shelters_gdf.to_file(os.path.join(output_dir, "kamakura_official_shelters.geojson"), driver="GeoJSON")
+    temples_gdf.to_file(os.path.join(output_dir, "kamakura_emergent_temples.geojson"), driver="GeoJSON")
+
+    print("\n[Exito] Archivos de infraestructura base almacenados en data/processed/")
 
 if __name__ == "__main__":
-    clean_for_mapbox()
+    download_kamakura_baseline()

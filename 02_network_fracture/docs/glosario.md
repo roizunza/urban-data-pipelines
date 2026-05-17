@@ -1,86 +1,88 @@
 # Glosario de Términos Técnicos
 
-Este documento define los conceptos clave de movilidad urbana, ciencia de datos espaciales, geografía cuantitativa y urbanismo con perspectiva de género utilizados en el proyecto **Viaja Segura** para facilitar su comprensión a perfiles no especializados.
+Este documento define los conceptos clave de geografía cuantitativa, ciencia de redes, modelado topográfico y gestión del riesgo de desastres utilizados a lo largo del proyecto para facilitar su comprensión a perfiles no especializados.
 
 ### 1. Conceptos de Modelado y Morfología Urbana
 
-* **Capilaridad Vial:** Capacidad de una red de transporte para penetrar en las zonas más recónditas o de difícil acceso de un territorio. En este proyecto, la Ruta 66 actúa como capilar en zonas donde el transporte masivo no puede llegar.
-* **Movilidad de "Última Milla":** Se refiere al último tramo de un viaje, a menudo el más complejo, que conecta un nodo de transporte masivo (como el Metro) con el destino final del usuario.
-* **Topografía Accidentada:** Terreno con pendientes pronunciadas y elevaciones irregulares. En el sur de la CDMX, esta condición actúa como una barrera física para el transporte masivo y un factor de fatiga para la movilidad peatonal.
-* **Urbanismo de Proximidad:** Modelo de planificación que busca que los servicios básicos (salud, educación, comercio) estén a una distancia caminable, reduciendo la dependencia del automóvil.
-* **Área de Captación (Catchment Area):** El territorio circundante a una parada de transporte desde el cual se atraen usuarios. En este modelo, se mide a través del alcance peatonal real.
-* **Eje de Integración:** Función de una ruta de transporte que sirve para vincular zonas periféricas aisladas con centros de intercambio modal y equipamiento regional.
+* **Cuello de Botella (Bottleneck):** Estrechamiento físico o topológico en la red vial que restringe severamente la capacidad de flujo peatonal, provocando aglomeraciones peligrosas durante evacuaciones masivas.
+* **Déficit Oficial:** Métrica que cuantifica el límite operativo del Estado. Representa el porcentaje exacto de la ciudad y de la población que queda fuera de la zona de cobertura del plan de respuesta a emergencias moderno debido a la pérdida de conectividad.
+* **Encapsulamiento Orográfico:** Condición geográfica donde un asentamiento urbano se encuentra rodeado y bloqueado por barreras naturales abruptas (como cadenas montañosas o acantilados), limitando severamente las rutas de escape terrestre.
+* **Fractura de Red (Network Fracture):** Rompimiento de la continuidad estructural de la traza urbana debido a la destrucción o sumersión de sus calles, transformando un tejido interconectado en múltiples clústeres aislados.
+* **Infraestructura Emergente:** Activos urbanos (como templos y santuarios históricos) que no fueron diseñados contemporáneamente para la protección civil, pero que por su ubicación estratégica, solidez y amplitud asumen roles críticos de refugio durante el colapso del sistema oficial.
+* **Malla Vial Histórica:** Trazado urbano heredado de épocas antiguas (como el período medieval en Kamakura), caracterizado por calles orgánicas, sinuosas y estrechas que incrementan la fricción y dificultan las logísticas modernas de evacuación.
+* **Refugio de Evacuación Designado (*Shitei Hinanjo*):** Equipamiento público validado y oficializado por el gobierno de Japón (escuelas, ayuntamientos, centros comunitarios) destinado a albergar a la población durante y después de un desastre natural.
+* **Run-up (Altura de Inundación):** La máxima altitud topográfica que alcanza el agua de un tsunami tierra adentro sobre el nivel del mar, utilizada para calibrar los umbrales de estrés del modelo.
 
-### 2. Ciencia de Datos y Algoritmos Espaciales
+### 2. Ciencia de Datos y Algoritmos de Redes
 
-* **Isocrona:** Línea trazada en un mapa que une todos los puntos que son accesibles desde un centro (parada) en un tiempo o esfuerzo determinado. El proyecto utiliza isocronas de **500 metros** para simular una caminata de aproximadamente 10 minutos.
-* **Análisis de Red (Network Analysis):** Cálculo de rutas basado en la geometría real de las calles y senderos, en lugar de usar radios circulares (euclidianos). Esto permite una medición exacta de la accesibilidad en terrenos con muchas barreras físicas.
-* **Fricción Espacial / Topográfica:** Resistencia que el territorio impone al movimiento. En zonas de barrancas, la pendiente incrementa el "costo" del viaje a pie; el modelo considera que cada metro de desnivel vertical equivale a un esfuerzo significativamente mayor que un metro horizontal.
-* **GTFS (General Transit Feed Specification):** Formato estándar internacional para datos de transporte público. Su integración permite la monitorización en tiempo real y la planificación precisa de horarios y rutas.
-* **Validación Geoespacial:** Proceso de verificar en **QGIS** que las coordenadas capturadas en campo coincidan con la infraestructura existente y la traza urbana real.
-* **Puntos de Carga (Hotspots):** Ubicaciones específicas (paradas) donde se registra la mayor intensidad de ascensos y descensos, indicando una alta demanda vinculada a la presencia de equipamiento urbano.
+* **Algoritmo de Dijkstra:** Algoritmo matemático empleado en la teoría de grafos para encontrar la ruta más corta (o de menor costo/esfuerzo) desde un nodo de origen hacia todos los demás nodos o hacia un destino específico dentro de una red ponderada.
+* **Arista (Edge):** En la teoría de redes, representa el vector o línea que conecta dos puntos. En este proyecto, cada arista es un segmento de calle transitable peatonalmente.
+* **Capacidad de Absorción:** El porcentaje matemático del impacto territorial crítico (calles desconectadas) que logra ser contenido, enrutado y solucionado de manera orgánica por la red de infraestructura patrimonial emergente.
+* **Costo de Viaje (Weight / Cost):** Valor numérico asignado a cada arista del grafo que no representa distancia, sino el nivel de "esfuerzo físico" o "tiempo" requerido para transitarla, penalizando aquellas rutas con pendientes empinadas.
+* **Grafo Topológico Dirigido:** Representación matemática estricta de la red vial mediante nodos y aristas interconectados. Al ser "dirigido", permite modelar el flujo en sentidos específicos y recalcular trayectorias cuando una sección de la red es eliminada.
+* **Network Fracture Engine:** Motor algorítmico paramétrico desarrollado en este proyecto, diseñado para simular escenarios de desastre, degradar grafos topológicos y auditar la vulnerabilidad de la movilidad de emergencia.
+* **Nodo Aislado / Huérfano (Orphan Node):** Punto de intersección vial que, tras la simulación de un nivel de inundación específico y la ruptura del grafo, pierde por completo su ruta de acceso hacia la red de refugios oficiales.
+* **Nodo Rescatado (Rescued Node):** Intersección que, habiendo perdido acceso al plan de evacuación gubernamental, logra restablecer una ruta de escape viable gracias a la proximidad y altitud de un templo histórico operativo.
+* **Simulación Paramétrica:** Ejecución iterativa de un modelo informático donde se modifican variables de entrada específicas (como elevar el umbral de inundación de 10m a 20m y 30m) para observar y cuantificar las variaciones en el comportamiento de la red.
+* **Vértice (Node):** Unidad mínima en un grafo. En el modelo urbano, representa las intersecciones de las calles o los callejones sin salida donde los peatones pueden tomar decisiones de enrutamiento.
 
-### 3. Movilidad, Género e Interseccionalidad
+### 3. Geoinformática y Topografía
 
-### 3. Movilidad, Género e Interseccionalidad
+* **DEM (Modelo Digital de Elevación):** Representación matricial (raster) de la superficie terrestre que almacena valores precisos de altitud (Z) sobre el nivel del mar.
+* **Fricción Espacial / Topográfica:** Resistencia invisible que el relieve impone sobre el movimiento humano. Subir una colina empinada requiere mayor esfuerzo energético que caminar en llano, alterando drásticamente el área real de accesibilidad peatonal.
+* **Función de Excursionismo de Tobler (Tobler's Hiking Function):** Ecuación matemática exponencial formulada en la geografía cuantitativa que calcula la velocidad de marcha de un peatón basándose en la inclinación exacta del terreno.
+* **Geointeligencia Preventiva:** Aplicación del análisis de datos espaciales y simulaciones computacionales para predecir vulnerabilidades territoriales antes de que ocurra un evento catastrófico, facilitando la planificación proactiva.
+* **Raster vs. Vector:** Formatos de datos espaciales. El *Raster* es una cuadrícula de píxeles (usado aquí para el modelo de altitud), mientras que el *Vector* utiliza puntos, líneas y polígonos matemáticos (usado aquí para mapear calles y refugios).
 
-*   **Economía de los Cuidados:** El conjunto de actividades no remuneradas (y a veces remuneradas) necesarias para el bienestar de las personas. La Ruta 66 es el soporte físico que permite que esta economía funcione en el sur de la ciudad.
-*   **Interseccionalidad:** Marco que analiza cómo diferentes identidades sociales (género, clase social, ubicación geográfica) se cruzan para crear experiencias de exclusión o privilegio en el acceso a la ciudad.
-*   **Justicia Espacial:** El derecho de todos los habitantes a acceder de manera equitativa a los recursos, servicios y oportunidades que ofrece la ciudad, independientemente de su ubicación en la periferia.
-*   **Movilidad de Cuidados:** Viajes realizados para realizar tareas domésticas y de cuidado de personas dependientes (niños, adultos mayores). Estos viajes suelen ser realizados mayoritariamente por mujeres.
-*   **Perspectiva de Género en el Transporte:** Enfoque analítico que reconoce que hombres y mujeres usan la ciudad de manera distinta debido a roles sociales, niveles de seguridad y necesidades de movilidad.
-*   **Trabajo de Cuidados:** Actividades destinadas a satisfacer las necesidades de alimentación, salud, educación y bienestar emocional de las personas (especialmente infancias, personas con discapacidad y adultos mayores), así como el mantenimiento del hogar. Este trabajo, realizado desproporcionadamente por mujeres, es el eje que genera la demanda de viajes encadenados y justifica la necesidad de transporte especializado.
-*   **Viajes Encadenados (Trip Chaining):** Patrón de movilidad que consiste en realizar múltiples paradas breves y sucesivas entre el origen y el destino final (ej. hogar -> escuela -> mercado -> parada -> trabajo)
+### 4. Gestión del Riesgo y Resiliencia
 
-### 4. Operación y Gestión de Transporte
+* **Agent-Based Modeling (ABM):** Técnica de simulación computacional donde "agentes" individuales (peatones virtuales) interactúan en un entorno bajo reglas predefinidas, utilizada para predecir dinámicas complejas de multitudes, pánico y cuellos de botella.
+* **DRR (Disaster Risk Reduction):** Disciplina global sistemática que busca identificar, evaluar y reducir los riesgos de desastres, minimizando las vulnerabilidades sociales y físicas del entorno construido.
+* **Resiliencia Latente / Orgánica:** Capacidad intrínseca y no planificada de un territorio o comunidad para absorber un impacto catastrófico. En este proyecto, se refiere a la inteligencia espacial de los recintos ancestrales para fungir como anclajes de supervivencia sin requerir inversión en infraestructura nueva.
+* **Vulnerabilidad Sistémica:** Falla en cadena donde el colapso de un componente del entorno urbano (una avenida principal inundada) provoca la inutilidad operativa de todo el sistema de respuesta de emergencias de esa zona.
 
-* **Transporte Concesionado:** Servicio de transporte público operado por particulares o asociaciones civiles bajo una concesión gubernamental. Su flexibilidad le permite adaptarse a zonas periféricas donde el Estado no tiene cobertura.
-* **Intercambio Modal:** Punto donde se encuentran diferentes sistemas de transporte (ej. Ruta 66 y Metro Miguel Ángel de Quevedo), permitiendo a los usuarios cambiar de vehículo para continuar su viaje.
-* **Indicadores Operativos:** Métricas matemáticas (como frecuencia de paso, ocupación por unidad y tiempos de ciclo) utilizadas para evaluar qué tan bien está funcionando un servicio de transporte.
-* **Sustento Técnico:** Conjunto de datos, mapas y análisis estadísticos que validan una propuesta social ante autoridades regulatorias (como SEMOVI).
-
---------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 # Glossary of Technical Terms
 
-This document defines the key concepts of urban mobility, spatial data science, quantitative geography, and gender-responsive urbanism used in the **Viaja Segura** project to facilitate understanding for non-specialized profiles.
+This document defines the key concepts of quantitative geography, network science, topographic modeling, and disaster risk management used throughout the project to facilitate understanding for non-specialized profiles.
 
-### 1. Urban Modeling and Morphology Concepts
+### 1. Urban Modeling and Risk Concepts
 
-* **Road Capillarity:** The ability of a transportation network to penetrate the most remote or difficult-to-access areas of a territory. In this project, Route 66 acts as a capillary in areas where mass transit cannot reach.
-* **"Last Mile" Mobility:** Refers to the final leg of a journey, often the most complex, connecting a mass transit hub (such as the Subway) to the user's final destination.
-* **Rugged Topography:** Terrain with steep slopes and irregular elevations. In southern CDMX, this condition acts as a physical barrier for mass transit and a fatigue factor for pedestrian mobility.
-* **Proximity Urbanism:** A planning model that seeks to place basic services (health, education, commerce) within walking distance, reducing car dependency.
-* **Catchment Area:** The surrounding territory of a transit stop from which users are drawn. In this model, it is measured through real pedestrian reach.
-* **Integration Axis:** The function of a transit route that serves to link isolated peripheral areas with regional modal exchange centers and facilities.
+* **Bottleneck:** Physical or topological narrowing in the road network that severely restricts pedestrian flow capacity, causing dangerous crowding during massive evacuations.
+* **Official Deficit:** Metric that quantifies the operational limit of the State. It represents the exact percentage of the city and population that falls outside the coverage area of the modern emergency response plan due to connectivity loss.
+* **Orographic Encapsulation:** Geographic condition where an urban settlement is surrounded and blocked by abrupt natural barriers (such as mountain ranges or cliffs), severely limiting land escape routes.
+* **Network Fracture:** Breakdown of the structural continuity of the urban fabric due to the destruction or submersion of its streets, transforming an interconnected tissue into multiple isolated clusters.
+* **Emergent Infrastructure:** Urban assets (such as historical temples and shrines) that were not contemporarily designed for civil protection, but due to their strategic location, solidity, and spaciousness, assume critical shelter roles during the collapse of the official system.
+* **Historical Road Network:** Urban layout inherited from ancient eras (such as the medieval period in Kamakura), characterized by organic, winding, and narrow streets that increase friction and hinder modern evacuation logistics.
+* **Designated Evacuation Shelter (*Shitei Hinanjo*):** Public facility validated and officialized by the Japanese government (schools, town halls, community centers) intended to house the population during and after a natural disaster.
+* **Run-up:** The maximum topographic elevation that a tsunami's water reaches inland above sea level, used to calibrate the model's stress thresholds.
 
-### 2. Spatial Data Science and Algorithms
+### 2. Data Science and Network Algorithms
 
-* **Isochrone:** A line drawn on a map connecting all points that are accessible from a center (stop) within a given time or effort. The project uses **500-meter** isochrones to simulate a walk of approximately 10 minutes.
-* **Network Analysis:** Route calculation based on the actual geometry of streets and paths, rather than using circular (Euclidean) radii. This allows for an exact measurement of accessibility in terrains with many physical barriers.
-* **Spatial / Topographic Friction:** The resistance that the territory imposes on movement. In ravine areas, the slope increases the "cost" of traveling on foot; the model considers that every meter of vertical drop is equivalent to a significantly greater effort than a horizontal meter.
-* **GTFS (General Transit Feed Specification):** International standard format for public transit data. Its integration allows for real-time monitoring and precise scheduling and routing.
-* **Geospatial Validation:** The process of verifying in **QGIS** that coordinates captured in the field match existing infrastructure and the actual urban layout.
-* **Hotspots:** Specific locations (stops) where the highest intensity of boardings and alightings is recorded, indicating high demand linked to the presence of urban facilities.
+* **Dijkstra's Algorithm:** Mathematical algorithm used in graph theory to find the shortest (or lowest cost/effort) path from a source node to all other nodes or a specific destination within a weighted network.
+* **Edge:** In network theory, it represents the vector or line connecting two points. In this project, each edge is a pedestrian-navigable street segment.
+* **Absorption Capacity:** The mathematical percentage of the critical territorial impact (disconnected streets) that manages to be contained, routed, and organically solved by the emergent heritage infrastructure network.
+* **Weight / Cost:** Numerical value assigned to each edge of the graph that does not represent distance, but the level of "physical effort" or "time" required to transit it, penalizing routes with steep slopes.
+* **Directed Topological Graph:** Strict mathematical representation of the road network using interconnected nodes and edges. Being "directed," it allows modeling flow in specific directions and recalculating trajectories when a section of the network is removed.
+* **Network Fracture Engine:** Parametric algorithmic engine developed in this project, designed to simulate disaster scenarios, degrade topological graphs, and audit emergency mobility vulnerability.
+* **Orphan / Isolated Node:** Street intersection point that, following the simulation of a specific flood level and the fracture of the graph, completely loses its access route to the official shelter network.
+* **Rescued Node:** Intersection that, having lost access to the government evacuation plan, manages to re-establish a viable escape route thanks to the proximity and altitude of an operational historical temple.
+* **Parametric Simulation:** Iterative execution of a computer model where specific input variables are modified (such as raising the flood threshold from 10m to 20m and 30m) to observe and quantify variations in network behavior.
+* **Node (Vertex):** The minimum unit in a graph. In the urban model, it represents street intersections or dead ends where pedestrians can make routing decisions.
 
-### 3. Mobility, Gender, and Intersectionality
+### 3. Geoinformatics and Topography
 
-*   **Care Economy:** The set of unpaid (and sometimes paid) activities necessary for people's well-being. Route 66 is the physical support that allows this economy to function in the south of the city.
-*   **Care Mobility:** Trips made to perform domestic tasks and care for dependents (children, elderly). These trips are usually made mostly by women.
-*   **Care Work:** Activities intended to satisfy the nutritional, health, educational, and emotional well-being needs of individuals (especially children, people with disabilities, and the elderly), as well as household maintenance. This work, disproportionately performed by women, is the axis that generates the demand for trip chaining and justifies the need for specialized transportation.
-*   **Gender Perspective in Transport:** An analytical approach that recognizes that men and women use the city differently due to social roles, safety levels, and mobility needs.
-*   **Intersectionality:** A framework that analyzes how different social identities (gender, social class, geographical location) intersect to create experiences of exclusion or privilege in access to the city.
-*   **Spatial Justice:** The right of all inhabitants to have equitable access to the resources, services, and opportunities offered by the city, regardless of their location on the periphery.
-*   **Trip Chaining:** A mobility pattern consisting of making multiple brief, successive stops between the origin and the final destination (e.g., home -> school -> market -> stop -> work).
+* **DEM (Digital Elevation Model):** Matrix representation (raster) of the Earth's surface that stores precise altitude values (Z) above sea level.
+* **Spatial / Topographic Friction:** Invisible resistance that the relief imposes on human movement. Climbing a steep hill requires more energy effort than walking on flat ground, drastically altering the actual area of pedestrian accessibility.
+* **Tobler's Hiking Function:** Exponential mathematical equation formulated in quantitative geography that calculates a pedestrian's walking speed based on the exact inclination of the terrain.
+* **Preventive Geointelligence:** Application of spatial data analysis and computer simulations to predict territorial vulnerabilities before a catastrophic event occurs, facilitating proactive planning.
+* **Raster vs. Vector:** Spatial data formats. *Raster* is a grid of pixels (used here for the altitude model), while *Vector* uses mathematical points, lines, and polygons (used here to map streets and shelters).
 
-### 4. Transit Operation and Management
+### 4. Risk Management and Resilience
 
-* **Concessioned Transport:** Public transit service operated by private individuals or civil associations under a government concession. Its flexibility allows it to adapt to peripheral areas where the state has no coverage.
-* **Modal Exchange:** A point where different transportation systems meet (e.g., Route 66 and the Miguel Ángel de Quevedo Subway station), allowing users to switch vehicles to continue their journey.
-* **Operational Indicators:** Mathematical metrics (such as frequency, occupancy per unit, and cycle times) used to evaluate how well a transit service is performing.
-* **Technical Foundation:** The set of data, maps, and statistical analyses that validate a social proposal before regulatory authorities (such as SEMOVI).
-
-
-
-
+* **Agent-Based Modeling (ABM):** Computer simulation technique where individual "agents" (virtual pedestrians) interact in an environment under predefined rules, used to predict complex crowd dynamics, panic, and bottlenecks.
+* **DRR (Disaster Risk Reduction):** Systematic global discipline that seeks to identify, evaluate, and reduce disaster risks, minimizing the social and physical vulnerabilities of the built environment.
+* **Latent / Organic Resilience:** Intrinsic and unplanned capacity of a territory or community to absorb a catastrophic impact. In this project, it refers to the spatial intelligence of ancestral sites to serve as survival anchors without requiring investment in new infrastructure.
+* **Systemic Vulnerability:** Chain failure where the collapse of one component of the urban environment (a flooded main avenue) causes the operational futility of the entire emergency response system in that area.
 
